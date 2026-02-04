@@ -1,6 +1,7 @@
 export { useProjects } from './useProjects';
 export type { Project } from './useProjects';
 export { useScrollAnimation } from './useScrollAnimation';
+export { useCardAnimation } from './useCardAnimation';
 export { useTeamMembers } from './useTeamMembers';
 export type { TeamMember } from './useTeamMembers';
 export { usePricePackages } from './usePricePackages';
