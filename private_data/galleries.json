@@ -1,47 +1,47 @@
 [
   {
     "id": 1,
-    "name": "Wedding at Grand Hotel",
-    "slug": "wedding",
-    "description": "Beautiful wedding ceremony captured",
-    "thumbnail": "/img/gallery/wedding-1-thumb.jpg",
-    "fullImage": "/img/gallery/wedding-1-full.jpg",
+    "name": "Anisa & Imran",
+    "slug": "anisa-and-imran",
+    "description": "Engagement Anisa & Imran\nSelamat atas pertunangan kalian semoga berjalan dengan lancar hingga harinya tiba",
+    "thumbnail": "/img/gallery/thumbnail_anisa-and-imran.jpeg",
+    "fullImage": "/img/gallery/anisa-and-imran.jpeg",
     "is_show": true
   },
   {
     "id": 2,
-    "name": "Corporate Conference",
-    "slug": "corporate",
-    "description": "Tech summit event photography",
-    "thumbnail": "/img/gallery/corp-1-thumb.jpg",
-    "fullImage": "/img/gallery/corp-1-full.jpg",
+    "name": "Anjali & Rangga",
+    "slug": "anjali-and-rangga",
+    "description": "Wedding Anjali & Rangga\nHappy Wedding! Semoga langgeng selamanya,\nSemoga kelak menjadi keluarga yang sakinah, mawaddah, warahmah (Samawa)",
+    "thumbnail": "/img/gallery/thumbnail_anjali-and-rangga.jpeg",
+    "fullImage": "/img/gallery/anjali-and-rangga.jpeg",
     "is_show": true
   },
   {
     "id": 3,
-    "name": "Nature Photography",
-    "slug": "nature",
-    "description": "Scenic landscapes and wildlife",
-    "thumbnail": "/img/gallery/nature-1-thumb.jpg",
-    "fullImage": "/img/gallery/nature-1-full.jpg",
+    "name": "Dita & Rais",
+    "slug": "dita-and-rais",
+    "description": "Wedding Dita & Rais\nHappy wedding! Semoga cinta dan kebahagiaan kalian terus bertumbuh. Semoga pernikahan kalian dipenuhi dengan cinta, kebahagiaan, dan keberkahan. Selamat menempuh hidup baru!",
+    "thumbnail": "/img/gallery/thumbnail_dita-and-rais.jpeg",
+    "fullImage": "/img/gallery/dita-and-rais.jpeg",
     "is_show": true
   },
   {
     "id": 4,
-    "name": "Portrait Session",
-    "slug": "portrait",
-    "description": "Professional portrait photography",
-    "thumbnail": "/img/gallery/portrait-1-thumb.jpg",
-    "fullImage": "/img/gallery/portrait-1-full.jpg",
+    "name": "Faisal & Intan",
+    "slug": "faisal-and-intan",
+    "description": "Wedding Faisal & Intan\nHappy wedding! Semoga hari ini jadi awal cerita rumah tangga yang indah. ",
+    "thumbnail": "/img/gallery/thumbnail_faisal-and-intan.jpeg",
+    "fullImage": "/img/gallery/faisal-and-intan.jpeg",
     "is_show": true
   },
   {
     "id": 5,
-    "name": "Product Photography",
-    "slug": "product",
-    "description": "High-quality product shots",
-    "thumbnail": "/img/gallery/product-1-thumb.jpg",
-    "fullImage": "/img/gallery/product-1-full.jpg",
+    "name": "Mirinda & Aldin",
+    "slug": "mirinda-and-aldin",
+    "description": "Engagement Mirinda &  Aldin\nSelamat atas pertunangannya, semoga menjadi awal kisah cinta yang indah.",
+    "thumbnail": "/img/gallery/thumbnail_mirinda-and-aldin.jpeg",
+    "fullImage": "/img/gallery/mirinda-and-aldin.jpeg",
     "is_show": true
   }
 ]

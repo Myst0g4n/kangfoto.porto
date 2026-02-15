@@ -1,47 +1,63 @@
 [
   {
     "id": 1,
-    "title": "Basic Package",
-    "description": "Perfect for small events and simple photography needs",
-    "price": "Rp 1.500.000",
+    "title": "Paket Premium",
+    "description": "Lamaran - Prewedding - Wedding",
+    "price": "Rp 8.000.000",
     "features": [
-      "Up to 2 hours coverage",
-      "1 photographer",
-      "Digital photos (high resolution)",
-      "Basic editing",
-      "Online gallery access"
+      "All File Edit",
+      "Lamaran",
+      "Prewedding",
+      "Wedding",
+      "Cetak Album Kolase 80 Foto",
+      "Cetak Foto 10r 3 Lembar + Bingkai",
+      "3 Video Cinematik (Lamaran, Prewedding & Wedding)",
+      "Free Flashdisk"
     ],
-    "note": "Additional hours available at Rp 300.000/hour"
+    "note": "Wajib DP 50% Setelah Deal For Job H-1 Wajib Pelunasan Hasil Edit Foto Video Di Kirim 1 Minggu Setelah Acara Kusus Untuk Wilayah Di Luar Kota   Dikenakan Biaya Tambahan Transportasi Dp Hangus Jika Pembatalan Dilakukan Oleh Client"
   },
   {
     "id": 2,
-    "title": "Premium Package",
-    "description": "Ideal for weddings and larger events",
-    "price": "Rp 3.500.000",
+    "title": "Paket Special",
+    "description": "Lamaran & Wedding",
+    "price": "Rp 6.500.000",
     "features": [
-      "Up to 6 hours coverage",
-      "2 photographers",
-      "Unlimited digital photos",
-      "Advanced editing",
-      "Print release included",
-      "Same day slideshow"
+      "All File Edit",
+      "Lamaran & Wedding",
+      "Cetak Album Kolase 80 Foto",
+      "Cetak Foto 10r 3 Lembar + Bingkai",
+      "2 Video Cinematik ( Lamaran & Wedding )",
+      "Free Flashdisk"
     ],
-    "note": "Engagement session included"
+    "note": "Wajib DP 50% Setelah Deal For Job H-1 Wajib Pelunasan Hasil Edit Foto Video Di Kirim 1 Minggu Setelah Acara Kusus Untuk Wilayah Di Luar Kota   Dikenakan Biaya Tambahan Transportasi Dp Hangus Jika Pembatalan Dilakukan Oleh Client"
   },
   {
     "id": 3,
-    "title": "Deluxe Package",
-    "description": "Complete solution for major events",
-    "price": "Rp 6.000.000",
+    "title": "Paket Standar A",
+    "description": "Wedding Day",
+    "price": "Rp 5.000.000",
     "features": [
-      "Full day coverage (up to 10 hours)",
-      "2 photographers + 1 videographer",
-      "Unlimited digital photos",
-      "Professional video highlights",
-      "Premium editing",
-      "Custom album design",
-      "Physical prints included"
+      "All File Edit",
+      "Wedding",
+      "Cetak Album Kolase 80 Foto",
+      "Cetak Foto 10r 3 Lembar + Bingkai",
+      "1 Video Cinematik ( Wedding )",
+      "Free Flashdisk"
     ],
-    "note": "Complimentary engagement and post-wedding sessions"
+    "note": "Wajib DP 50% Setelah Deal For Job H-1 Wajib Pelunasan Hasil Edit Foto Video Di Kirim 1 Minggu Setelah Acara Kusus Untuk Wilayah Di Luar Kota   Dikenakan Biaya Tambahan Transportasi Dp Hangus Jika Pembatalan Dilakukan Oleh Client"
+  },
+  {
+    "id": 4,
+    "title": "Paket Standar B",
+    "description": "Wedding Day",
+    "price": "Rp 3.800.000",
+    "features": [
+      "All File Edit",
+      "Wedding",
+      "Cetak Foto 10r 3 Lembar + Bingkai",
+      "1 Video Cinematik ( Wedding )",
+      "Free Flashdisk"
+    ],
+    "note": "Wajib DP 50% Setelah Deal For Job H-1 Wajib Pelunasan Hasil Edit Foto Video Di Kirim 1 Minggu Setelah Acara Kusus Untuk Wilayah Di Luar Kota   Dikenakan Biaya Tambahan Transportasi Dp Hangus Jika Pembatalan Dilakukan Oleh Client"
   }
 ]
