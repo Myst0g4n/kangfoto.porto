@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getData, SocialData } from '../utils/dataManager';
 
 /**
  * Interface untuk data social media
@@ -28,43 +29,34 @@ export const useSocialMedia = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchSocialMedia = async () => {
-      try {
-        const response = await fetch('/data/social.json');
-        
-        if (!response.ok) {
-          throw new Error(`Gagal mengambil data social media: ${response.status} ${response.statusText}`);
-        }
-        
-        const data: SocialData = await response.json();
-        
-        // Pastikan semua field memiliki nilai, jika tidak ada gunakan '#'
-        const processedData: SocialData = {
-          facebook: data.facebook || '#',
-          instagram: data.instagram || '#',
-          tiktok: data.tiktok || '#',
-          twitter: data.twitter || '#',
-        };
+    try {
+      // Ambil data langsung dari sistem manajemen data
+      const data = getData.social();
+      
+      // Pastikan semua field memiliki nilai, jika tidak ada gunakan '#'
+      const processedData: SocialData = {
+        facebook: data.facebook || '#',
+        instagram: data.instagram || '#',
+        tiktok: data.tiktok || '#',
+        twitter: data.twitter || '#',
+      };
 
-        setSocialData(processedData);
-      } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan tidak diketahui';
-        setError(errorMessage);
-        console.error('Error fetching social media:', err);
-        
-        // Tetap set data default jika terjadi error
-        setSocialData({
-          facebook: '#',
-          instagram: '#',
-          tiktok: '#',
-          twitter: '#',
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSocialMedia();
+      setSocialData(processedData);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan tidak diketahui';
+      setError(errorMessage);
+      console.error('Error fetching social media:', err);
+      
+      // Tetap set data default jika terjadi error
+      setSocialData({
+        facebook: '#',
+        instagram: '#',
+        tiktok: '#',
+        twitter: '#',
+      });
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   return { socialData, loading, error };

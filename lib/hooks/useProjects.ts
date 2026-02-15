@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getFilteredData, GalleryItem } from '../utils/dataManager';
 
 export interface Project {
     id: number;
@@ -11,37 +12,25 @@ export interface Project {
 }
 
 export const useProjects = () => {
-    const [projects, setProjects] = useState<Project[]>([]);
+    const [projects, setProjects] = useState<GalleryItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const response = await fetch('/data/galleries.json');
+        try {
+            // Ambil data langsung dari sistem manajemen data
+            const data = getFilteredData.galleries.active();
+            
+            setProjects(data);
+        } catch (err) {
+            setError('Failed to fetch projects');
+            console.error('Error fetching projects:', err);
 
-                if (response.ok) {
-                    const data: Project[] = await response.json();
-                    
-                    // Filter hanya yang is_show === true
-                    const filteredProjects = data.filter((item) => item.is_show === true);
-                    
-                    setProjects(filteredProjects);
-                } else {
-                    throw new Error('Failed to fetch projects');
-                }
-            } catch (err) {
-                setError('Failed to fetch projects');
-                console.error('Error fetching projects:', err);
-                
-                // Set data default jika terjadi error
-                setProjects([]);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchProjects();
+            // Set data default jika terjadi error
+            setProjects([]);
+        } finally {
+            setLoading(false);
+        }
     }, []);
 
     return { projects, loading, error };

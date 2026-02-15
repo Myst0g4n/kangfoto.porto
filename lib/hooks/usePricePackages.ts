@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getData, PricePackage } from '../utils/dataManager';
 
 export interface PricePackage {
     id: number;
@@ -15,28 +16,19 @@ export const usePricePackages = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchPackages = async () => {
-            try {
-                const response = await fetch('/data/packages.json');
+        try {
+            // Ambil data langsung dari sistem manajemen data
+            const data = getData.packages();
+            setPackages(data);
+        } catch (err) {
+            setError('Failed to fetch packages');
+            console.error('Error fetching packages:', err);
 
-                if (response.ok) {
-                    const data: PricePackage[] = await response.json();
-                    setPackages(data);
-                } else {
-                    throw new Error('Failed to fetch packages');
-                }
-            } catch (err) {
-                setError('Failed to fetch packages');
-                console.error('Error fetching packages:', err);
-                
-                // Set data default jika terjadi error
-                setPackages([]);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPackages();
+            // Set data default jika terjadi error
+            setPackages([]);
+        } finally {
+            setLoading(false);
+        }
     }, []);
 
     return { packages, loading, error };
