@@ -80,42 +80,50 @@ export default function Footer() {
               <p className="text-red-400">Error loading social links</p>
             ) : (
               <>
-                <a
-                  href={socialData.facebook}
-                  target={socialData.facebook !== '#' ? '_blank' : '_self'}
-                  rel={socialData.facebook !== '#' ? 'noopener noreferrer' : ''}
-                  className={`text-gray-400 transition-colors duration-300 ${getHoverColor('facebook')}`}
-                >
-                  <span className="sr-only">Facebook</span>
-                  {getIcon('facebook')}
-                </a>
-                <a
-                  href={socialData.instagram}
-                  target={socialData.instagram !== '#' ? '_blank' : '_self'}
-                  rel={socialData.instagram !== '#' ? 'noopener noreferrer' : ''}
-                  className={`text-gray-400 transition-colors duration-300 ${getHoverColor('instagram')}`}
-                >
-                  <span className="sr-only">Instagram</span>
-                  {getIcon('instagram')}
-                </a>
-                <a
-                  href={socialData.tiktok}
-                  target={socialData.tiktok !== '#' ? '_blank' : '_self'}
-                  rel={socialData.tiktok !== '#' ? 'noopener noreferrer' : ''}
-                  className={`text-gray-400 transition-colors duration-300 ${getHoverColor('tiktok')}`}
-                >
-                  <span className="sr-only">TikTok</span>
-                  {getIcon('tiktok')}
-                </a>
-                <a
-                  href={socialData.twitter}
-                  target={socialData.twitter !== '#' ? '_blank' : '_self'}
-                  rel={socialData.twitter !== '#' ? 'noopener noreferrer' : ''}
-                  className={`text-gray-400 transition-colors duration-300 ${getHoverColor('twitter')}`}
-                >
-                  <span className="sr-only">Twitter</span>
-                  {getIcon('twitter')}
-                </a>
+                {socialData.facebook !== '#' && (
+                  <a
+                    href={socialData.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('facebook')}`}
+                  >
+                    <span className="sr-only">Facebook</span>
+                    {getIcon('facebook')}
+                  </a>
+                )}
+                {socialData.instagram !== '#' && (
+                  <a
+                    href={socialData.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('instagram')}`}
+                  >
+                    <span className="sr-only">Instagram</span>
+                    {getIcon('instagram')}
+                  </a>
+                )}
+                {socialData.tiktok !== '#' && (
+                  <a
+                    href={socialData.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('tiktok')}`}
+                  >
+                    <span className="sr-only">TikTok</span>
+                    {getIcon('tiktok')}
+                  </a>
+                )}
+                {socialData.twitter !== '#' && (
+                  <a
+                    href={socialData.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('twitter')}`}
+                  >
+                    <span className="sr-only">Twitter</span>
+                    {getIcon('twitter')}
+                  </a>
+                )}
               </>
             )}
           </div>
