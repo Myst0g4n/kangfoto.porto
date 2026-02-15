@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "experience": "5 years of professional photography experience",
+    "quote": "Capturing moments that last forever",
+    "photo": "/img/team/john-doe.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "experience": "3 years of wedding photography specialization",
+    "quote": "Every moment is a masterpiece waiting to be captured",
+    "photo": "/img/team/jane-smith.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Michael Johnson",
+    "experience": "7 years of corporate and event photography",
+    "quote": "Creating visual stories that speak volumes",
+    "photo": "/img/team/michael-johnson.jpg"
+  }
+]

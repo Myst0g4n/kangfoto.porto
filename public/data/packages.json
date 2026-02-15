@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Basic Package",
+    "description": "Perfect for small events and simple photography needs",
+    "price": "Rp 1.500.000",
+    "features": [
+      "Up to 2 hours coverage",
+      "1 photographer",
+      "Digital photos (high resolution)",
+      "Basic editing",
+      "Online gallery access"
+    ],
+    "note": "Additional hours available at Rp 300.000/hour"
+  },
+  {
+    "id": 2,
+    "title": "Premium Package",
+    "description": "Ideal for weddings and larger events",
+    "price": "Rp 3.500.000",
+    "features": [
+      "Up to 6 hours coverage",
+      "2 photographers",
+      "Unlimited digital photos",
+      "Advanced editing",
+      "Print release included",
+      "Same day slideshow"
+    ],
+    "note": "Engagement session included"
+  },
+  {
+    "id": 3,
+    "title": "Deluxe Package",
+    "description": "Complete solution for major events",
+    "price": "Rp 6.000.000",
+    "features": [
+      "Full day coverage (up to 10 hours)",
+      "2 photographers + 1 videographer",
+      "Unlimited digital photos",
+      "Professional video highlights",
+      "Premium editing",
+      "Custom album design",
+      "Physical prints included"
+    ],
+    "note": "Complimentary engagement and post-wedding sessions"
+  }
+]

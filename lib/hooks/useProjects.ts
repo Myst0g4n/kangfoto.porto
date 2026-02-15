@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react';
-import { apiClient } from '@/lib/api';
 
 export interface Project {
     id: number;
-    attributes?: {
-        title: string;
-        description?: string;
-        image?: {
-            data?: {
-                attributes?: {
-                    url: string;
-                };
-            };
-        };
-    };
-    title?: string;
-    image?: string;
+    name: string;
+    slug: string;
+    description: string;
+    thumbnail: string;
+    fullImage: string;
+    is_show: boolean;
 }
 
 export const useProjects = () => {
@@ -26,14 +18,24 @@ export const useProjects = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await apiClient.get<Project[]>('/api/galleries');
-                
-                if (response.success && response.data) {
-                    setProjects(Array.isArray(response.data) ? response.data : [response.data]);
+                const response = await fetch('/data/galleries.json');
+
+                if (response.ok) {
+                    const data: Project[] = await response.json();
+                    
+                    // Filter hanya yang is_show === true
+                    const filteredProjects = data.filter((item) => item.is_show === true);
+                    
+                    setProjects(filteredProjects);
+                } else {
+                    throw new Error('Failed to fetch projects');
                 }
             } catch (err) {
                 setError('Failed to fetch projects');
                 console.error('Error fetching projects:', err);
+                
+                // Set data default jika terjadi error
+                setProjects([]);
             } finally {
                 setLoading(false);
             }

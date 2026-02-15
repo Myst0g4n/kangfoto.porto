@@ -1,12 +1,24 @@
-import { PricePackage } from '@/lib/hooks';
+import { PricePackage, useCardAnimation } from '@/lib/hooks';
 
 interface PriceCardProps {
     package: PricePackage;
+    index: number;
 }
 
-export function PriceCard({ package: pkg }: PriceCardProps) {
+export function PriceCard({ package: pkg, index }: PriceCardProps) {
+    const { isVisible, elementRef } = useCardAnimation({ delay: index * 200 }); // Delay bertambah untuk setiap card
+
     return (
-        <div className="bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 relative animate-float">
+        <div
+            ref={elementRef}
+            className={`bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 relative ${
+                isVisible
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-10'
+            } ${
+                isVisible ? 'animate-float' : ''
+            }`}
+        >
             <h4 className="text-2xl font-bold text-white mb-2">{pkg.title}</h4>
             <p className="text-sm text-gray-400 mb-4">{pkg.description}</p>
             <p className="text-4xl font-bold text-blue-400 mb-6">{pkg.price}</p>

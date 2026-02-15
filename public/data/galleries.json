@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Wedding at Grand Hotel",
+    "slug": "wedding",
+    "description": "Beautiful wedding ceremony captured",
+    "thumbnail": "/img/gallery/wedding-1-thumb.jpg",
+    "fullImage": "/img/gallery/wedding-1-full.jpg",
+    "is_show": true
+  },
+  {
+    "id": 2,
+    "name": "Corporate Conference",
+    "slug": "corporate",
+    "description": "Tech summit event photography",
+    "thumbnail": "/img/gallery/corp-1-thumb.jpg",
+    "fullImage": "/img/gallery/corp-1-full.jpg",
+    "is_show": true
+  },
+  {
+    "id": 3,
+    "name": "Nature Photography",
+    "slug": "nature",
+    "description": "Scenic landscapes and wildlife",
+    "thumbnail": "/img/gallery/nature-1-thumb.jpg",
+    "fullImage": "/img/gallery/nature-1-full.jpg",
+    "is_show": true
+  },
+  {
+    "id": 4,
+    "name": "Portrait Session",
+    "slug": "portrait",
+    "description": "Professional portrait photography",
+    "thumbnail": "/img/gallery/portrait-1-thumb.jpg",
+    "fullImage": "/img/gallery/portrait-1-full.jpg",
+    "is_show": true
+  },
+  {
+    "id": 5,
+    "name": "Product Photography",
+    "slug": "product",
+    "description": "High-quality product shots",
+    "thumbnail": "/img/gallery/product-1-thumb.jpg",
+    "fullImage": "/img/gallery/product-1-full.jpg",
+    "is_show": true
+  }
+]

@@ -14,7 +14,7 @@ export const useTeamMembers = (): TeamMember[] => {
     useEffect(() => {
         const fetchTeamMembers = async () => {
             try {
-                const response = await fetch('/api/members');
+                const response = await fetch('/data/teams.json');
                 if (!response.ok) {
                     throw new Error(`Failed to fetch team members: ${response.status} ${response.statusText}`);
                 }

@@ -7,4 +7,6 @@ export type { TeamMember } from './useTeamMembers';
 export { usePricePackages } from './usePricePackages';
 export type { PricePackage } from './usePricePackages';
 export { useProjectGallery } from './useProjectGallery';
-export type { ProjectImage, ProjectGallery } from './useProjectGallery';
+export type { ProjectImage } from './useProjectGallery';
+export { useSocialMedia } from './useSocialMedia';
+export type { SocialData } from './useSocialMedia';

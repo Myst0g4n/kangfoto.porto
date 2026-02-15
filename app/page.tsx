@@ -5,6 +5,7 @@ import Project from "./components/project";
 import About from "./components/about";
 import Team from "./components/team";
 import PriceList from "./components/pricelist";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
@@ -16,12 +17,7 @@ export default function Home() {
       <Team />
       <PriceList /> 
 
-      {/* Footer */}
-      <footer className="bg-black/50 border-t border-purple-500/20 py-8 mt-20">
-        <div className="max-w-7xl mx-auto px-4 text-center text-gray-400">
-          <p>&copy; 2019 KangFoto. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

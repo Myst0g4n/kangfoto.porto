@@ -5,7 +5,7 @@ import { PriceCard } from './PriceCard';
 import { usePricePackages } from '@/lib/hooks';
 
 export default function PriceList() {
-    const { visible, titleRef, gridRef } = useScrollAnimation();
+    const { visible, titleRef } = useScrollAnimation(); // Hapus gridRef karena animasi akan ditangani per card
     const { packages, loading, error } = usePricePackages();
 
     if (loading && packages.length === 0) {
@@ -49,14 +49,9 @@ export default function PriceList() {
             >
                 Price List
             </h3>
-            <div
-                ref={gridRef}
-                className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${
-                    visible.grid ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'
-                }`}
-            >
-                {packages.map((pkg) => (
-                    <PriceCard key={pkg.id} package={pkg} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {packages.map((pkg, index) => (
+                    <PriceCard key={pkg.id} package={pkg} index={index} />
                 ))}
             </div>
         </section>
