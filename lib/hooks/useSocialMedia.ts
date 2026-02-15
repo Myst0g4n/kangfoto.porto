@@ -2,16 +2,6 @@ import { useState, useEffect } from 'react';
 import { getData, SocialData } from '../utils/dataManager';
 
 /**
- * Interface untuk data social media
- */
-export interface SocialData {
-  facebook: string;
-  instagram: string;
-  tiktok: string;
-  twitter: string;
-}
-
-/**
  * Custom hook untuk mengelola data social media dari file JSON
  * @returns socialData - Objek berisi link social media
  * @returns loading - Status loading data

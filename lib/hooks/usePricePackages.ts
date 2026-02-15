@@ -1,15 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getData, PricePackage } from '../utils/dataManager';
 
-export interface PricePackage {
-    id: number;
-    title: string;
-    description: string;
-    price: string;
-    features: string[];
-    note: string;
-}
-
 export const usePricePackages = () => {
     const [packages, setPackages] = useState<PricePackage[]>([]);
     const [loading, setLoading] = useState(true);

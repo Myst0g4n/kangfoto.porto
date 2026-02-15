@@ -1,16 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getFilteredData, GalleryItem } from '../utils/dataManager';
 
-export interface ProjectImage {
-    id: number;
-    name: string;
-    slug: string;
-    description: string;
-    thumbnail: string;
-    fullImage: string;
-    is_show: boolean;
-}
-
 export const useProjectGallery = () => {
     const [images, setImages] = useState<GalleryItem[]>([]);
     const [loading, setLoading] = useState(true);

@@ -1,6 +1,6 @@
 'use client';
 
-import { ProjectImage } from '@/lib/hooks';
+import { GalleryItem as ProjectImage } from '@/lib/utils/dataManager';
 import { useEffect } from 'react';
 
 interface LightboxGalleryProps {

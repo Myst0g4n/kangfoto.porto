@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useScrollAnimation, useProjectGallery, ProjectImage } from '@/lib/hooks';
+import { useScrollAnimation, useProjectGallery } from '@/lib/hooks';
+import { GalleryItem as ProjectImage } from '@/lib/utils/dataManager';
 import { ProjectGalleryCardLanding } from './ProjectGalleryCardLanding';
 import { LightboxGallery } from './LightboxGallery';
 import Link from 'next/link';
