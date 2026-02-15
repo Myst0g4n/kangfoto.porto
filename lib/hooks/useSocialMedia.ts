@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 
+/**
+ * Interface untuk data social media
+ */
 export interface SocialData {
   facebook: string;
   instagram: string;
@@ -7,6 +10,12 @@ export interface SocialData {
   twitter: string;
 }
 
+/**
+ * Custom hook untuk mengelola data social media dari file JSON
+ * @returns socialData - Objek berisi link social media
+ * @returns loading - Status loading data
+ * @returns error - Pesan error jika terjadi kesalahan
+ */
 export const useSocialMedia = () => {
   const [socialData, setSocialData] = useState<SocialData>({
     facebook: '#',
@@ -14,6 +23,7 @@ export const useSocialMedia = () => {
     tiktok: '#',
     twitter: '#',
   });
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +33,7 @@ export const useSocialMedia = () => {
         const response = await fetch('/data/social.json');
         
         if (!response.ok) {
-          throw new Error('Failed to fetch social media data');
+          throw new Error(`Gagal mengambil data social media: ${response.status} ${response.statusText}`);
         }
         
         const data: SocialData = await response.json();
@@ -38,7 +48,8 @@ export const useSocialMedia = () => {
 
         setSocialData(processedData);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+        const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan tidak diketahui';
+        setError(errorMessage);
         console.error('Error fetching social media:', err);
         
         // Tetap set data default jika terjadi error
