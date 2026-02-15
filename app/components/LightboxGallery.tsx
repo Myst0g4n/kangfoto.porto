@@ -36,15 +36,22 @@ export function LightboxGallery({ image, onClose }: LightboxGalleryProps) {
         >
             {/* Main content */}
             <div
-                className="relative max-w-4xl max-h-[90vh] w-full mx-4 animate-scaleIn"
+                className="relative max-w-4xl w-full mx-4 animate-scaleIn"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Image container */}
-                <div className="relative bg-black rounded-lg overflow-hidden">
+                {/* Image container with scrollable area */}
+                <div 
+                    className="relative bg-black rounded-lg overflow-y-auto max-h-[90vh]"
+                    style={{ 
+                        msOverflowStyle: 'auto', 
+                        scrollbarWidth: 'thin' 
+                    }}
+                >
                     <img
                         src={image.fullImage}
                         alt={image.name}
-                        className="w-full h-full object-contain"
+                        className="w-full object-contain block"
+                        style={{ maxHeight: 'calc(90vh - 100px)' }} // Memberi ruang untuk info overlay
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.src = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNmY2ZjZmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=`;
