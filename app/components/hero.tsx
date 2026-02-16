@@ -30,13 +30,13 @@ export default function Hero() {
                         visible.text ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                 >
-                    <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6">KANG FOTO</h1>
+                    <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-6">KANG FOTO</h1>
                     <div className="mb-8 max-w-full">
-                        <small className="brand-alt text-lg sm:text-xl text-gray-100 block max-w-full">
+                        <small className="brand-alt text-lg sm:text-xl text-pink-200 block max-w-full">
                             <Typing words={["Professional Photography Moments", "Capturing Life's Best Moments", "Creating Beautiful Memories"]} />
                         </small>
                     </div>
-                    <p className="text-gray-400 mt-4 text-base sm:text-lg md:text-xl text-justify leading-relaxed">
+                    <p className="text-pink-100 mt-4 text-base sm:text-lg md:text-xl text-justify leading-relaxed">
                         Rencakan hari pernikahan Anda dengan sentuhan profesional dari KangFoto. Kami hadir untuk mengabadikan momen-momen berharga Anda dengan kualitas terbaik dan layanan yang tak tertandingi. Biarkan kami membantu Anda menciptakan kenangan yang akan dikenang sepanjang masa.
                     </p>
                 </div>

@@ -13,14 +13,14 @@ export default function PriceList() {
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="pricelist">
                 <h3
                     ref={titleRef}
-                    className={`text-4xl font-bold text-white mb-12 text-center transition-all duration-1000 ${
+                    className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-12 text-center transition-all duration-1000 ${
                         visible.title ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'
                     }`}
                 >
                     Price List
                 </h3>
                 <div className="flex justify-center items-center h-64">
-                    <p className="text-white text-xl">Loading packages...</p>
+                    <p className="text-pink-200 text-xl">Loading packages...</p>
                 </div>
             </section>
         );
@@ -29,7 +29,7 @@ export default function PriceList() {
     if (error && packages.length === 0) {
         return (
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="pricelist">
-                <h3 className="text-4xl font-bold text-white mb-12 text-center">
+                <h3 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-12 text-center">
                     Price List
                 </h3>
                 <div className="flex justify-center items-center h-64">
@@ -43,7 +43,7 @@ export default function PriceList() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="pricelist">
             <h3
                 ref={titleRef}
-                className={`text-4xl font-bold text-white mb-12 text-center transition-all duration-1000 ${
+                className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-12 text-center transition-all duration-1000 ${
                     visible.title ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'
                 }`}
             >

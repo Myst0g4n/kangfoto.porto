@@ -8,11 +8,11 @@ export default function Team() {
     const teamMembers = useTeamMembers();
 
     return (
-        <section className="py-16 bg-black/20" id="team">
+        <section className="py-16 bg-gradient-to-br from-pink-900/20 to-pink-800/20" id="team">
             <div className="max-w-7xl mx-auto px-4">
                 <h3
                     ref={titleRef}
-                    className={`text-4xl font-bold text-white mb-12 text-center transition-all duration-1000 ${
+                    className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600 mb-12 text-center transition-all duration-1000 ${
                         visible.title ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                 >
@@ -24,7 +24,7 @@ export default function Team() {
                             <TeamMemberCard key={member.id} member={member} index={index} />
                         ))
                     ) : (
-                        <div className="text-center text-white py-8">
+                        <div className="text-center text-pink-200 py-8">
                             <p>Loading team members...</p>
                         </div>
                     )}
