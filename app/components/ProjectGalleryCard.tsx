@@ -12,7 +12,7 @@ export function ProjectGalleryCard({ image, onImageClick }: ProjectGalleryCardPr
     return (
         <div
             onClick={() => onImageClick(image)}
-            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-pink-500/20 via-pink-400/20 to-pink-500/20 aspect-[4/3] cursor-pointer shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-500/20 via-gray-400/20 to-gray-500/20 aspect-[4/3] cursor-pointer shadow-lg hover:shadow-xl transition-shadow duration-300"
         >
             {/* Thumbnail Image */}
             <div className="absolute inset-0 overflow-hidden">

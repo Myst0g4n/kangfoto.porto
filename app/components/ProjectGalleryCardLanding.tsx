@@ -12,7 +12,7 @@ export function ProjectGalleryCardLanding({ image, onImageClick }: ProjectGaller
     return (
         <div
             onClick={() => onImageClick(image)}
-            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-pink-500/30 via-pink-400/30 to-pink-500/30 aspect-[3/4] cursor-pointer shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-500/30 via-gray-400/30 to-gray-500/30 aspect-[3/4] cursor-pointer shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
         >
             {/* Thumbnail Image */}
             <div className="absolute inset-0 overflow-hidden">
@@ -38,7 +38,7 @@ export function ProjectGalleryCardLanding({ image, onImageClick }: ProjectGaller
                         {image.description}
                     </p>
                     <div className="flex items-center justify-center gap-3">
-                        <span className="px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-600 text-white rounded-full text-sm font-semibold shadow-lg">
+                        <span className="px-4 py-2 bg-gradient-to-r from-gray-400 to-gray-600 text-white rounded-full text-sm font-semibold shadow-lg">
                             {image.slug}
                         </span>
                         <span className="text-white text-base font-medium flex items-center gap-2 animate-pulse">

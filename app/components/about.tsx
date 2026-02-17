@@ -13,11 +13,11 @@ export default function About() {
     const { visible, titleRef, contentRef, statsRef } = useScrollAnimation();
 
     return (
-        <section className="py-16 px-4 bg-gradient-to-br from-pink-900/20 via-pink-800/20 to-pink-900/20" id="about">
+        <section className="py-16 px-4 bg-gradient-to-br from-gray-900/30 via-gray-800/30 to-gray-900/30" id="about">
             <div className="max-w-4xl mx-auto">
                 <h3
                     ref={titleRef}
-                    className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-pink-500 mb-12 text-center transition-all duration-1000 ${
+                    className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 mb-12 text-center transition-all duration-1000 ${
                         visible.title ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                 >
@@ -30,14 +30,14 @@ export default function About() {
                         visible.content ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                 >
-                    <div className="bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 h-64 rounded-lg shadow-lg">
+                    <div className="bg-gradient-to-br from-gray-400 via-gray-500 to-gray-600 h-64 rounded-lg shadow-lg">
                         <img src="/img/AboutPhoto.jpeg" alt="KangFoto Team" className="w-full h-full object-cover rounded-lg" />
                     </div>
                     <div>
-                        <p className="text-lg text-pink-100 mb-4">
+                        <p className="text-lg text-gray-200 mb-4">
                             KangFoto adalah studio fotografi profesional yang berdedikasi untuk menangkap momen berharga Anda dengan kualitas terbaik.
                         </p>
-                        <p className="text-pink-200 mb-6">
+                        <p className="text-gray-300 mb-6">
                             Dengan pengalaman yang luas di industri fotografi, kami memahami setiap detail penting untuk menciptakan karya yang tak terlupakan.
                         </p>
                     </div>
