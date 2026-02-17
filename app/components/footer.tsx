@@ -51,14 +51,14 @@ export default function Footer() {
       case 'instagram':
         return 'hover:text-pink-400';
       case 'facebook':
-        return 'hover:text-rose-400';
+        return 'hover:text-pink-500';
       case 'twitter':
       case 'x':
-        return 'hover:text-rose-300';
+        return 'hover:text-pink-300';
       case 'tiktok':
-        return 'hover:text-pink-500';
+        return 'hover:text-pink-600';
       default:
-        return 'hover:text-rose-300';
+        return 'hover:text-pink-400';
     }
   };
 
@@ -67,7 +67,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gradient-to-r from-pink-900/50 via-rose-900/50 to-pink-900/50 border-t border-pink-500/30 py-8 mt-20">
+    <footer className="bg-gradient-to-r from-pink-900/50 via-pink-800/50 to-pink-900/50 border-t border-pink-500/30 py-8 mt-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">

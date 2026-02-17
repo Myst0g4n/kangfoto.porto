@@ -19,7 +19,7 @@ export default function Project() {
         <section id="portfolio" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <h3
                 ref={titleRef}
-                className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-pink-300 to-amber-200 mb-12 text-center transition-all duration-1000 ${
+                className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-pink-500 mb-12 text-center transition-all duration-1000 ${
                     visible.title ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
             >
@@ -46,7 +46,7 @@ export default function Project() {
             <div className="flex justify-center mt-12">
                 <Link
                     href="/gallery"
-                    className="group relative px-8 py-3 bg-gradient-to-r from-rose-300 via-pink-300 to-amber-200 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-rose-300/50 transition-all duration-300 overflow-hidden"
+                    className="group relative px-8 py-3 bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-pink-400/50 transition-all duration-300 overflow-hidden"
                 >
                     <span className="relative z-10 flex items-center gap-2">
                         Lihat Galeri Lengkap
@@ -64,7 +64,7 @@ export default function Project() {
                             />
                         </svg>
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-rose-400 via-pink-400 to-amber-300 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </Link>
             </div>
 

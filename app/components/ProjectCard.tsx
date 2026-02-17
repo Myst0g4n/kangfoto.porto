@@ -8,7 +8,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     const title = project.name || 'Project'; // Menggunakan property name sesuai dengan struktur data baru
 
     return (
-        <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-pink-500/20 via-rose-500/20 to-pink-500/20 aspect-square hover:scale-105 transition duration-300 cursor-pointer">
+        <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-pink-500/20 via-pink-400/20 to-pink-500/20 aspect-square hover:scale-105 transition duration-300 cursor-pointer">
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition"></div>
             <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-white text-xl font-semibold">{title}</span>
