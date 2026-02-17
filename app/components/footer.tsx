@@ -49,16 +49,16 @@ export default function Footer() {
   const getHoverColor = (platformName: string) => {
     switch (platformName.toLowerCase()) {
       case 'instagram':
-        return 'hover:text-purple-400';
+        return 'hover:text-pink-400';
       case 'facebook':
-        return 'hover:text-blue-400';
+        return 'hover:text-rose-400';
       case 'twitter':
       case 'x':
-        return 'hover:text-blue-300';
+        return 'hover:text-rose-300';
       case 'tiktok':
         return 'hover:text-pink-500';
       default:
-        return 'hover:text-gray-300';
+        return 'hover:text-rose-300';
     }
   };
 
@@ -67,15 +67,15 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-black/50 border-t border-purple-500/20 py-8 mt-20">
+    <footer className="bg-gradient-to-r from-pink-900/50 via-rose-900/50 to-pink-900/50 border-t border-pink-500/30 py-8 mt-20">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-gray-400">&copy; 2019 KangFoto. All rights reserved.</p>
+            <p className="text-pink-200">&copy; 2019 KangFoto. All rights reserved.</p>
           </div>
           <div className="flex space-x-6">
             {loading ? (
-              <p className="text-gray-400">Loading social links...</p>
+              <p className="text-pink-200">Loading social links...</p>
             ) : error ? (
               <p className="text-red-400">Error loading social links</p>
             ) : (
@@ -85,7 +85,7 @@ export default function Footer() {
                     href={socialData.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('facebook')}`}
+                    className={`text-pink-200 transition-colors duration-300 ${getHoverColor('facebook')}`}
                   >
                     <span className="sr-only">Facebook</span>
                     {getIcon('facebook')}
@@ -96,7 +96,7 @@ export default function Footer() {
                     href={socialData.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('instagram')}`}
+                    className={`text-pink-200 transition-colors duration-300 ${getHoverColor('instagram')}`}
                   >
                     <span className="sr-only">Instagram</span>
                     {getIcon('instagram')}
@@ -107,7 +107,7 @@ export default function Footer() {
                     href={socialData.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('tiktok')}`}
+                    className={`text-pink-200 transition-colors duration-300 ${getHoverColor('tiktok')}`}
                   >
                     <span className="sr-only">TikTok</span>
                     {getIcon('tiktok')}
@@ -118,7 +118,7 @@ export default function Footer() {
                     href={socialData.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-gray-400 transition-colors duration-300 ${getHoverColor('twitter')}`}
+                    className={`text-pink-200 transition-colors duration-300 ${getHoverColor('twitter')}`}
                   >
                     <span className="sr-only">Twitter</span>
                     {getIcon('twitter')}
