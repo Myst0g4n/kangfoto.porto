@@ -1,5 +1,5 @@
 import { useCardAnimation } from '@/lib/hooks';
-import { PricePackage } from '@/lib/utils/dataManager';
+import { PricePackage } from '@/lib/hooks/usePricePackages';
 
 interface PriceCardProps {
     package: PricePackage;

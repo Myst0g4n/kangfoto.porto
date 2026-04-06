@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useScrollAnimation, useProjectGallery } from '@/lib/hooks';
-import { GalleryItem as ProjectImage } from '@/lib/utils/dataManager';
+import { GalleryItem as ProjectImage } from '@/lib/hooks/useProjectGallery';
 import { ProjectGalleryCard } from '@/app/components/ProjectGalleryCard';
 import { LightboxGallery } from '@/app/components/LightboxGallery';
 import Link from 'next/link';

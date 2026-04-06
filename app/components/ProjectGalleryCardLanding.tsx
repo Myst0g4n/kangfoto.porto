@@ -1,6 +1,6 @@
 'use client';
 
-import { GalleryItem as ProjectImage } from '@/lib/utils/dataManager';
+import { GalleryItem as ProjectImage } from '@/lib/hooks/useProjectGallery';
 
 interface ProjectGalleryCardLandingProps {
     image: ProjectImage;

@@ -1,4 +1,4 @@
-import { GalleryItem as ProjectImage } from '@/lib/utils/dataManager'; // Menggunakan GalleryItem karena struktur data telah berubah
+import { GalleryItem as ProjectImage } from '@/lib/hooks/useProjectGallery';
 
 interface ProjectCardProps {
     project: ProjectImage; // Menggunakan ProjectImage sebagai ganti Project
