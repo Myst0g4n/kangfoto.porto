@@ -80,9 +80,9 @@ export default function Footer() {
               <p className="text-red-400">Error loading social links</p>
             ) : (
               <>
-                {socialData.facebook !== '#' && (
+                {socialData.facebook && (
                   <a
-                    href={socialData.facebook}
+                    href={socialData.facebook || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`text-gray-300 transition-colors duration-300 ${getHoverColor('facebook')}`}
@@ -91,9 +91,9 @@ export default function Footer() {
                     {getIcon('facebook')}
                   </a>
                 )}
-                {socialData.instagram !== '#' && (
+                {socialData.instagram && (
                   <a
-                    href={socialData.instagram}
+                    href={socialData.instagram || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`text-gray-300 transition-colors duration-300 ${getHoverColor('instagram')}`}
@@ -102,9 +102,9 @@ export default function Footer() {
                     {getIcon('instagram')}
                   </a>
                 )}
-                {socialData.tiktok !== '#' && (
+                {socialData.tiktok && (
                   <a
-                    href={socialData.tiktok}
+                    href={socialData.tiktok || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`text-gray-300 transition-colors duration-300 ${getHoverColor('tiktok')}`}
@@ -113,9 +113,9 @@ export default function Footer() {
                     {getIcon('tiktok')}
                   </a>
                 )}
-                {socialData.twitter !== '#' && (
+                {socialData.twitter && (
                   <a
-                    href={socialData.twitter}
+                    href={socialData.twitter || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`text-gray-300 transition-colors duration-300 ${getHoverColor('twitter')}`}
