@@ -20,33 +20,17 @@ export const useProjectGallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        console.log('🔍 useProjectGallery: Fetching from /api/galleries...');
         const response = await apiClient.get<GalleryItem[]>('/galleries');
         
-        console.log('📦 useProjectGallery: Raw API Response:', response);
-        console.log('📦 useProjectGallery: Response success:', response.success);
-        console.log('📦 useProjectGallery: Response data:', response.data);
-        console.log('📦 useProjectGallery: Response error:', response.error);
-        
         if (response.success && response.data) {
-          console.log('✅ useProjectGallery: Data received, count:', response.data.length);
-          console.log('✅ useProjectGallery: First item (BEFORE resolve):', response.data[0]);
-          console.log('✅ useProjectGallery: First item thumbnail (BEFORE):', response.data[0]?.thumbnail);
-          console.log('✅ useProjectGallery: First item fullImage (BEFORE):', response.data[0]?.fullImage);
+          const baseUrl = apiClient.getBackendBaseUrl();
           
           // Resolve image URLs according to API Documentation
-          // Docs: "To display the image, prepend /storage/" to the relative path
           const resolvedData = response.data.map(item => {
-            const baseUrl = apiClient.getBackendBaseUrl();
-            
-            // Helper function to build the full storage URL
             const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
-              if (path.startsWith('http')) return path; // Already full URL
+              if (path.startsWith('http')) return path; 
               
-              // If path is relative like "galleries/image.jpg"
-              // We need to construct: http://localhost:8000/storage/galleries/image.jpg
-              // Clean path if it has leading slash
               const cleanPath = path.startsWith('/') ? path.substring(1) : path;
               return `${baseUrl}/storage/${cleanPath}`;
             };
@@ -58,24 +42,13 @@ export const useProjectGallery = () => {
             };
           });
           
-          console.log('🌐 useProjectGallery: After URL resolution, first item:', resolvedData[0]);
-          console.log('🌐 useProjectGallery: Resolved thumbnail:', resolvedData[0]?.thumbnail);
-          console.log('🌐 useProjectGallery: Resolved fullImage:', resolvedData[0]?.fullImage);
-          
           // Filter only visible galleries
           const filteredImages = resolvedData.filter((item) => item.is_show === true);
-          console.log('🖼️ useProjectGallery: After filtering (is_show=true), count:', filteredImages.length);
-          console.log('🖼️ useProjectGallery: Filtered first item:', filteredImages[0]);
-          console.log('🖼️ useProjectGallery: Filtered first item thumbnail:', filteredImages[0]?.thumbnail);
-          console.log('🖼️ useProjectGallery: Filtered first item fullImage:', filteredImages[0]?.fullImage);
-          
           setImages(filteredImages);
         } else {
-          console.error('❌ useProjectGallery: Failed to fetch gallery');
           throw new Error(response.error || 'Failed to fetch gallery');
         }
       } catch (err) {
-        console.error('❌ useProjectGallery Error:', err);
         setError('Failed to fetch gallery');
         setImages([]);
       } finally {
