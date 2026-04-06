@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api-client';
+import { getCachedData, setCachedData } from '@/lib/cache';
 
 export interface GalleryItem {
   id: number;
@@ -19,13 +20,23 @@ export const useProjectGallery = () => {
 
   useEffect(() => {
     const fetchGallery = async () => {
+      // 1. Check Cache First
+      const cached = getCachedData<GalleryItem[]>('galleries');
+      if (cached) {
+        setImages(cached);
+        setLoading(false);
+        // Kita lanjut fetch API di background untuk update cache jika perlu,
+        // tapi UI sudah loading selesai.
+      }
+
+      // 2. Fetch from API
       try {
         const response = await apiClient.get<GalleryItem[]>('/galleries');
         
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
           
-          // Resolve image URLs according to API Documentation
+          // Resolve image URLs
           const resolvedData = response.data.map(item => {
             const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
@@ -45,8 +56,12 @@ export const useProjectGallery = () => {
           // Filter only visible galleries
           const filteredImages = resolvedData.filter((item) => item.is_show === true);
           setImages(filteredImages);
+          setCachedData('galleries', filteredImages); // Update cache
         } else {
-          throw new Error(response.error || 'Failed to fetch gallery');
+          // Jika API gagal dan tidak ada cache, tampilkan error
+          if (!cached) {
+             throw new Error(response.error || 'Failed to fetch gallery');
+          }
         }
       } catch (err) {
         setError('Failed to fetch gallery');

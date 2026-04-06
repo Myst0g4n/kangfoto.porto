@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api-client';
+import { getCachedData, setCachedData } from '@/lib/cache';
 
 export interface TeamMember {
   id: number;
@@ -16,9 +17,18 @@ export const useTeamMembers = () => {
 
   useEffect(() => {
     const fetchTeamMembers = async () => {
+      // 1. Check Cache First
+      const cached = getCachedData<TeamMember[]>('teams');
+      if (cached) {
+        setTeamMembers(cached);
+        setLoading(false);
+        // Lanjut fetch API di background
+      }
+
+      // 2. Fetch from API
       try {
         const response = await apiClient.get<TeamMember[]>('/teams');
-        
+
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
           
@@ -31,13 +41,15 @@ export const useTeamMembers = () => {
             }
             return { ...item, photo };
           });
-          
+
           setTeamMembers(resolvedData);
+          setCachedData('teams', resolvedData); // Update cache
         } else {
-          throw new Error(response.error || 'Failed to fetch team members');
+          if (!cached) {
+            throw new Error(response.error || 'Failed to fetch team members');
+          }
         }
       } catch (err) {
-        console.error('Error fetching team members:', err);
         setError('Failed to fetch team members');
         setTeamMembers([]);
       } finally {
