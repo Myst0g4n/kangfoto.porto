@@ -30,12 +30,23 @@ export const useProjectGallery = () => {
         
         if (response.success && response.data) {
           console.log('✅ useProjectGallery: Data received, count:', response.data.length);
-          console.log('✅ useProjectGallery: First item:', response.data[0]);
-          console.log('✅ useProjectGallery: First item thumbnail:', response.data[0]?.thumbnail);
-          console.log('✅ useProjectGallery: First item fullImage:', response.data[0]?.fullImage);
+          console.log('✅ useProjectGallery: First item (BEFORE resolve):', response.data[0]);
+          console.log('✅ useProjectGallery: First item thumbnail (BEFORE):', response.data[0]?.thumbnail);
+          console.log('✅ useProjectGallery: First item fullImage (BEFORE):', response.data[0]?.fullImage);
+          
+          // Resolve image URLs to full backend URLs
+          const resolvedData = response.data.map(item => ({
+            ...item,
+            thumbnail: item.thumbnail.startsWith('http') ? item.thumbnail : `${apiClient.getBackendBaseUrl()}${item.thumbnail}`,
+            fullImage: item.fullImage.startsWith('http') ? item.fullImage : `${apiClient.getBackendBaseUrl()}${item.fullImage}`,
+          }));
+          
+          console.log('🌐 useProjectGallery: After URL resolution, first item:', resolvedData[0]);
+          console.log('🌐 useProjectGallery: Resolved thumbnail:', resolvedData[0]?.thumbnail);
+          console.log('🌐 useProjectGallery: Resolved fullImage:', resolvedData[0]?.fullImage);
           
           // Filter only visible galleries
-          const filteredImages = response.data.filter((item) => item.is_show === true);
+          const filteredImages = resolvedData.filter((item) => item.is_show === true);
           console.log('🖼️ useProjectGallery: After filtering (is_show=true), count:', filteredImages.length);
           console.log('🖼️ useProjectGallery: Filtered first item:', filteredImages[0]);
           console.log('🖼️ useProjectGallery: Filtered first item thumbnail:', filteredImages[0]?.thumbnail);

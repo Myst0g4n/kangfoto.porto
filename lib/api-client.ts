@@ -22,6 +22,43 @@ class ApiClient {
     this.baseUrl = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
   }
 
+  // Helper to get backend base URL (without /api)
+  public getBackendBaseUrl(): string {
+    // Remove '/api' from the end if present
+    return this.baseUrl.replace(/\/api$/, '');
+  }
+
+  // Helper to convert relative image paths to full URLs
+  private resolveImageUrl(path: string | null | undefined): string | null {
+    if (!path) return null;
+    // If already a full URL, return as-is
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return path;
+    }
+    // If relative path, prepend backend base URL
+    const baseUrl = this.getBackendBaseUrl();
+    // Remove leading slash from path if present to avoid double slashes
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${baseUrl}${cleanPath}`;
+  }
+
+  // Helper to resolve image URLs in gallery data
+  private resolveGalleryImages(gallery: any): any {
+    return {
+      ...gallery,
+      thumbnail: this.resolveImageUrl(gallery.thumbnail) || gallery.thumbnail,
+      fullImage: this.resolveImageUrl(gallery.fullImage) || gallery.fullImage,
+    };
+  }
+
+  // Helper to resolve image URLs in team data
+  private resolveTeamImages(team: any): any {
+    return {
+      ...team,
+      photo: this.resolveImageUrl(team.photo) || team.photo,
+    };
+  }
+
   private getAuthHeader(): Record<string, string> {
     if (typeof window === 'undefined') return {};
     
