@@ -1,28 +1,40 @@
 import { useEffect, useState } from 'react';
-import { getData, TeamMember } from '../utils/dataManager';
+import { apiClient } from '@/lib/api-client';
 
-export const useTeamMembers = (): TeamMember[] => {
-    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+export interface TeamMember {
+  id: number;
+  name: string;
+  experience: string;
+  quote: string;
+  photo: string;
+}
 
-    useEffect(() => {
-        try {
-            // Ambil data langsung dari sistem manajemen data
-            const data = getData.teams();
-            setTeamMembers(data);
-        } catch (error) {
-            console.error('Error fetching team members:', error);
-            // Fallback data jika terjadi error
-            setTeamMembers([
-                {
-                    id: 1,
-                    name: "Data Tidak Tersedia",
-                    experience: "Terjadi kesalahan saat memuat data",
-                    quote: "Silakan coba lagi nanti",
-                    photo: "/placeholder-team-member.jpg"
-                }
-            ]);
+export const useTeamMembers = () => {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        const response = await apiClient.get<TeamMember[]>('/teams');
+        
+        if (response.success && response.data) {
+          setTeamMembers(response.data);
+        } else {
+          throw new Error(response.error || 'Failed to fetch team members');
         }
-    }, []);
+      } catch (err) {
+        console.error('Error fetching team members:', err);
+        setError('Failed to fetch team members');
+        setTeamMembers([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return teamMembers;
+    fetchTeamMembers();
+  }, []);
+
+  return teamMembers;
 };
