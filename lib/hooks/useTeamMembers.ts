@@ -20,7 +20,19 @@ export const useTeamMembers = () => {
         const response = await apiClient.get<TeamMember[]>('/teams');
         
         if (response.success && response.data) {
-          setTeamMembers(response.data);
+          const baseUrl = apiClient.getBackendBaseUrl();
+          
+          // Resolve team photo URLs
+          const resolvedData = response.data.map(item => {
+            let photo = item.photo || '';
+            if (photo && !photo.startsWith('http')) {
+              const cleanPath = photo.startsWith('/') ? photo.substring(1) : photo;
+              photo = `${baseUrl}/storage/${cleanPath}`;
+            }
+            return { ...item, photo };
+          });
+          
+          setTeamMembers(resolvedData);
         } else {
           throw new Error(response.error || 'Failed to fetch team members');
         }

@@ -185,6 +185,48 @@ Authorization: Bearer <token>
 
 ---
 
+## 🖼️ Public Image Access
+
+All uploaded images are publicly accessible without authentication. Images are stored via Laravel's symbolic link at `/storage/`.
+
+### URL Pattern
+```
+http://localhost:8000/storage/{path}
+```
+
+### Examples
+
+| Type | Example URL |
+|------|-------------|
+| Gallery thumbnail | `http://localhost:8000/storage/galleries/anisa-and-imran-thumb.jpg` |
+| Gallery full image | `http://localhost:8000/storage/galleries/anisa-and-imran.jpg` |
+| Team photo | `http://localhost:8000/storage/team/Hasim.png` |
+
+### How It Works
+
+1. Files uploaded via `POST /api/upload` are saved to `storage/app/public/{type}/`
+2. A symbolic link connects `public/storage` → `storage/app/public`
+3. Any path returned in `originalPath` or `thumbnailPath` from the upload response can be prefixed with the base URL to access the image
+4. **No authentication required** — images are public
+
+### Response Format from API Endpoints
+
+When you get data from galleries/teams endpoints, image paths are returned like this:
+
+```json
+{
+  "thumbnail": "galleries/anisa-and-imran-thumb.jpg",
+  "fullImage": "galleries/anisa-and-imran.jpg"
+}
+```
+
+To display the image, prepend `/storage/`:
+```html
+<img src="http://localhost:8000/storage/galleries/anisa-and-imran-thumb.jpg" />
+```
+
+---
+
 ## ⚙️ Admin Config Endpoints
 
 ### GET `/api/admin/config`

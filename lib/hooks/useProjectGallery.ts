@@ -34,21 +34,27 @@ export const useProjectGallery = () => {
           console.log('✅ useProjectGallery: First item thumbnail (BEFORE):', response.data[0]?.thumbnail);
           console.log('✅ useProjectGallery: First item fullImage (BEFORE):', response.data[0]?.fullImage);
           
-          // Resolve image URLs to full backend URLs
+          // Resolve image URLs according to API Documentation
+          // Docs: "To display the image, prepend /storage/" to the relative path
           const resolvedData = response.data.map(item => {
             const baseUrl = apiClient.getBackendBaseUrl();
             
-            // Fungsi helper untuk memastikan path punya '/' di depan
-            const fixPath = (path: string | undefined): string => {
+            // Helper function to build the full storage URL
+            const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
-              if (path.startsWith('http')) return path; // Sudah URL lengkap
-              return path.startsWith('/') ? `${baseUrl}${path}` : `${baseUrl}/${path}`;
+              if (path.startsWith('http')) return path; // Already full URL
+              
+              // If path is relative like "galleries/image.jpg"
+              // We need to construct: http://localhost:8000/storage/galleries/image.jpg
+              // Clean path if it has leading slash
+              const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+              return `${baseUrl}/storage/${cleanPath}`;
             };
 
             return {
               ...item,
-              thumbnail: fixPath(item.thumbnail),
-              fullImage: fixPath(item.fullImage),
+              thumbnail: fixImagePath(item.thumbnail),
+              fullImage: fixImagePath(item.fullImage),
             };
           });
           
