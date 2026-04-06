@@ -12,8 +12,16 @@ export default function Project() {
     const { images } = useProjectGallery();
     const [selectedImage, setSelectedImage] = useState<ProjectImage | null>(null);
 
+    console.log('🎨 Project Component: images count:', images.length);
+    console.log('🎨 Project Component: images data:', images);
+    if (images.length > 0) {
+        console.log('🎨 Project Component: First image URL (thumbnail):', images[0]?.thumbnail);
+        console.log('🎨 Project Component: First image URL (fullImage):', images[0]?.fullImage);
+    }
+
     // Ambil 5 gambar pertama sebagai preview
     const previewImages = images.slice(0, 5);
+    console.log('🎨 Project Component: previewImages count:', previewImages.length);
 
     return (
         <section id="portfolio" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

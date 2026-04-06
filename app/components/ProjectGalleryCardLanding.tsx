@@ -8,6 +8,10 @@ interface ProjectGalleryCardLandingProps {
 }
 
 export function ProjectGalleryCardLanding({ image, onImageClick }: ProjectGalleryCardLandingProps) {
+    console.log('🃏 ProjectGalleryCardLanding: Rendering card');
+    console.log('🃏 ProjectGalleryCardLanding: Image prop:', image);
+    console.log('🃏 ProjectGalleryCardLanding: thumbnail URL:', image.thumbnail);
+    console.log('🃏 ProjectGalleryCardLanding: fullImage URL:', image.fullImage);
 
     return (
         <div
@@ -21,9 +25,11 @@ export function ProjectGalleryCardLanding({ image, onImageClick }: ProjectGaller
                     alt={image.name}
                     className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
                     onError={(e) => {
+                        console.error('❌ ProjectGalleryCardLanding: Image failed to load:', image.thumbnail);
                         const target = e.target as HTMLImageElement;
                         target.src = `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNmY2ZjZmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=`;
                     }}
+                    onLoad={() => console.log('✅ ProjectGalleryCardLanding: Image loaded successfully:', image.thumbnail)}
                 />
             </div>
 
