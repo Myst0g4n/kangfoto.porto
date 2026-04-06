@@ -35,11 +35,22 @@ export const useProjectGallery = () => {
           console.log('✅ useProjectGallery: First item fullImage (BEFORE):', response.data[0]?.fullImage);
           
           // Resolve image URLs to full backend URLs
-          const resolvedData = response.data.map(item => ({
-            ...item,
-            thumbnail: item.thumbnail.startsWith('http') ? item.thumbnail : `${apiClient.getBackendBaseUrl()}${item.thumbnail}`,
-            fullImage: item.fullImage.startsWith('http') ? item.fullImage : `${apiClient.getBackendBaseUrl()}${item.fullImage}`,
-          }));
+          const resolvedData = response.data.map(item => {
+            const baseUrl = apiClient.getBackendBaseUrl();
+            
+            // Fungsi helper untuk memastikan path punya '/' di depan
+            const fixPath = (path: string | undefined): string => {
+              if (!path) return '';
+              if (path.startsWith('http')) return path; // Sudah URL lengkap
+              return path.startsWith('/') ? `${baseUrl}${path}` : `${baseUrl}/${path}`;
+            };
+
+            return {
+              ...item,
+              thumbnail: fixPath(item.thumbnail),
+              fullImage: fixPath(item.fullImage),
+            };
+          });
           
           console.log('🌐 useProjectGallery: After URL resolution, first item:', resolvedData[0]);
           console.log('🌐 useProjectGallery: Resolved thumbnail:', resolvedData[0]?.thumbnail);
