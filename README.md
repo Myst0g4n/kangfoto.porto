@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📸 KangFoto Portfolio - Frontend
 
-## Getting Started
+Website portfolio fotografi modern berbasis **Next.js 16** dengan integrasi API backend.
 
-First, run the development server:
+---
 
+## 🚀 Quick Start
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Setup Environment
+```bash
+# Copy file environment
+cp .env.example .env.local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Edit .env.local sesuai konfigurasi Anda
+# NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Run Development Server
+```bash
+npm run dev
+```
 
-## Learn More
+Website akan berjalan di: **http://localhost:3000**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Struktur Folder
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+frontend/
+├── app/                    # Next.js App Router
+│   ├── components/         # UI Components
+│   ├── gallery/            # Gallery page
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Homepage
+├── lib/                    # Utilities & Hooks
+│   ├── api-client.ts       # API client untuk backend
+│   ├── cache.ts            # LocalStorage caching
+│   └── hooks/              # Custom React hooks
+├── public/                 # Static assets
+├── docs/                   # Dokumentasi
+│   ├── API_DOCUMENTATION.md
+│   └── API_INTEGRATION_GUIDE.md
+├── .env.local              # Environment variables (tidak di-commit)
+├── .env.example            # Template environment
+├── next.config.js          # Next.js configuration (proxy API)
+└── package.json
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework**: Next.js 16.1.4 (Turbopack)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: React Hooks + LocalStorage Cache
+- **API Integration**: REST API dengan Proxy (Rewrites)
+
+---
+
+## 🌐 API Integration
+
+Frontend ini terhubung ke backend Laravel API. Lihat dokumentasi lengkap di:
+
+- **API Documentation**: `docs/API_DOCUMENTATION.md`
+- **Integration Guide**: `docs/API_INTEGRATION_GUIDE.md`
+
+---
+
+## 📦 Build untuk Production
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 🔑 Default Admin Login
+
+- **URL**: `/admin/login`
+- **Username**: `admin`
+- **Password**: `admin123`
+
+⚠️ **Ganti password setelah login pertama!**
+
+---
+
+## 📖 Dokumentasi Lainnya
+
+Lihat folder `docs/` untuk panduan lengkap.
+
+---
+
+**Version**: 2.0  
+**Last Updated**: 2026-04-09  
+**Status**: ✅ Production Ready
