@@ -17,23 +17,31 @@ export interface ApiResponse<T = any> {
 
 class ApiClient {
   private baseUrl: string;
+  private backendBaseUrl: string;
   private apiToken: string;
 
   constructor() {
-    // Menggunakan relative path '/api' agar request dicapture oleh Next.js Rewrites.
-    // Request ke /api/* akan di-proxy secara otomatis ke backend http://localhost:8080/api/*
-    // Ini adalah cara standar di Next.js untuk menghindari masalah CORS.
+    // Read configuration from environment variables
+    const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
+    const publicToken = process.env.NEXT_PUBLIC_API_TOKEN || '';
+
+    // Backend base URL (without /api)
+    this.backendBaseUrl = backendUrl;
+
+    // Using relative path '/api' so requests are captured by Next.js Rewrites.
+    // Request to /api/* will be proxied automatically to backend http://localhost:8080/api/*
+    // This is the standard Next.js way to avoid CORS issues.
     this.baseUrl = '/api';
-    
-    // Public API Token untuk akses read-only ke backend
-    // Bisa dioverride via environment variable NEXT_PUBLIC_API_TOKEN
-    this.apiToken = process.env.NEXT_PUBLIC_API_TOKEN || 'public_e72ceca32e2c1ab4b54b7fb2a644b28c048e593fd2fa1f4bdb272f3c7bd1a915';
+
+    // Public API Token for read-only access to backend
+    // Can be overridden via .env.local: NEXT_PUBLIC_API_TOKEN
+    this.apiToken = publicToken;
   }
 
-  // Helper to get backend base URL (tanpa /api) untuk resolusi gambar
+  // Helper to get backend base URL (without /api) for image resolution
   public getBackendBaseUrl(): string {
-    // Gambar perlu URL lengkap backend karena tidak di-proxy oleh Next.js
-    return 'http://localhost:8080';
+    // Images need the full backend URL because they are not proxied by Next.js
+    return this.backendBaseUrl;
   }
 
   // Helper to convert relative image paths to full URLs
