@@ -1,12 +1,15 @@
-// next.config.js - Konfigurasi sederhana untuk aplikasi
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
-  // Konfigurasi dasar
-  output: 'export', // Static export
-  trailingSlash: true,
   images: {
-    unoptimized: true, // Karena kita menggunakan static export
+    unoptimized: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:8080/api/:path*', // Proxy ke Backend
+      },
+    ];
   },
 };
 

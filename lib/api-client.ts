@@ -17,16 +17,23 @@ export interface ApiResponse<T = any> {
 
 class ApiClient {
   private baseUrl: string;
+  private apiToken: string;
 
   constructor() {
-    // Default to port 8080 as per BACKEND_API.md
-    this.baseUrl = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8080/api';
+    // Menggunakan relative path '/api' agar request dicapture oleh Next.js Rewrites.
+    // Request ke /api/* akan di-proxy secara otomatis ke backend http://localhost:8080/api/*
+    // Ini adalah cara standar di Next.js untuk menghindari masalah CORS.
+    this.baseUrl = '/api';
+    
+    // Public API Token untuk akses read-only ke backend
+    // Bisa dioverride via environment variable NEXT_PUBLIC_API_TOKEN
+    this.apiToken = process.env.NEXT_PUBLIC_API_TOKEN || 'public_e72ceca32e2c1ab4b54b7fb2a644b28c048e593fd2fa1f4bdb272f3c7bd1a915';
   }
 
-  // Helper to get backend base URL (without /api)
+  // Helper to get backend base URL (tanpa /api) untuk resolusi gambar
   public getBackendBaseUrl(): string {
-    // Remove '/api' from the end if present
-    return this.baseUrl.replace(/\/api$/, '');
+    // Gambar perlu URL lengkap backend karena tidak di-proxy oleh Next.js
+    return 'http://localhost:8080';
   }
 
   // Helper to convert relative image paths to full URLs
@@ -63,8 +70,14 @@ class ApiClient {
   private getAuthHeader(): Record<string, string> {
     if (typeof window === 'undefined') return {};
     
-    const token = localStorage.getItem('auth_token');
-    return token ? { 'Authorization': `Bearer ${token}` } : {};
+    // Cek apakah user sedang login (admin token)
+    const adminToken = localStorage.getItem('auth_token');
+    if (adminToken) {
+      return { 'Authorization': `Bearer ${adminToken}` };
+    }
+    
+    // Jika tidak, gunakan public API token untuk read-only access
+    return { 'Authorization': `Bearer ${this.apiToken}` };
   }
 
   private async request<T>(

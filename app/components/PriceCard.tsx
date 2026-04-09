@@ -24,11 +24,15 @@ export function PriceCard({ package: pkg, index }: PriceCardProps) {
             <p className="text-sm text-gray-400 mb-4">{pkg.description}</p>
             <p className="text-4xl font-bold text-blue-400 mb-6">{pkg.price}</p>
             <ul className="space-y-3 mb-8">
-                {pkg.features.map((feature: string) => (
-                    <li key={feature} className="text-gray-300 flex items-center">
-                        <span className="text-green-400 mr-2">✓</span> {feature}
-                    </li>
-                ))}
+                {Array.isArray(pkg.features) ? (
+                    pkg.features.map((feature: string) => (
+                        <li key={feature} className="text-gray-300 flex items-center">
+                            <span className="text-green-400 mr-2">✓</span> {feature}
+                        </li>
+                    ))
+                ) : (
+                    <li className="text-gray-400">No features listed</li>
+                )}
             </ul>
             <p className="text-xs text-yellow-400 italic">{pkg.note}</p>
 

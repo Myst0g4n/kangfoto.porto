@@ -21,7 +21,14 @@ export const usePricePackages = () => {
         const response = await apiClient.get<PricePackage[]>('/packages');
         
         if (response.success && response.data) {
-          setPackages(response.data);
+          // Pastikan features adalah array, jika string JSON maka parse dulu
+          const parsedPackages = response.data.map((pkg: any) => ({
+            ...pkg,
+            features: typeof pkg.features === 'string' 
+              ? JSON.parse(pkg.features) 
+              : (Array.isArray(pkg.features) ? pkg.features : [])
+          }));
+          setPackages(parsedPackages);
         } else {
           throw new Error(response.error || 'Failed to fetch packages');
         }
