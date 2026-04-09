@@ -18,24 +18,18 @@ export interface ApiResponse<T = any> {
 class ApiClient {
   private baseUrl: string;
   private backendBaseUrl: string;
-  private apiToken: string;
 
   constructor() {
-    // Read configuration from environment variables
+    // Read API URL from environment variable
     const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
-    const publicToken = process.env.NEXT_PUBLIC_API_TOKEN || '';
 
     // Backend base URL (without /api)
     this.backendBaseUrl = backendUrl;
 
     // Using relative path '/api' so requests are captured by Next.js Rewrites.
-    // Request to /api/* will be proxied automatically to backend http://localhost:8080/api/*
+    // Request to /api/* will be proxied automatically to backend.
     // This is the standard Next.js way to avoid CORS issues.
     this.baseUrl = '/api';
-
-    // Public API Token for read-only access to backend
-    // Can be overridden via .env.local: NEXT_PUBLIC_API_TOKEN
-    this.apiToken = publicToken;
   }
 
   // Helper to get backend base URL (without /api) for image resolution
@@ -78,14 +72,14 @@ class ApiClient {
   private getAuthHeader(): Record<string, string> {
     if (typeof window === 'undefined') return {};
     
-    // Cek apakah user sedang login (admin token)
+    // Only add Authorization header if user is logged in as admin
     const adminToken = localStorage.getItem('auth_token');
     if (adminToken) {
       return { 'Authorization': `Bearer ${adminToken}` };
     }
     
-    // Jika tidak, gunakan public API token untuk read-only access
-    return { 'Authorization': `Bearer ${this.apiToken}` };
+    // No token for public access
+    return {};
   }
 
   private async request<T>(
