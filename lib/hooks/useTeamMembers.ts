@@ -34,12 +34,15 @@ export const useTeamMembers = () => {
           
           // Resolve team photo URLs
           const resolvedData = response.data.map(item => {
-            let photo = item.photo || '';
-            if (photo && !photo.startsWith('http')) {
-              const cleanPath = photo.startsWith('/') ? photo.substring(1) : photo;
-              photo = `${baseUrl}/storage/${cleanPath}`;
-            }
-            return { ...item, photo };
+            const fixPhotoPath = (path: string | undefined): string => {
+              if (!path) return '';
+              if (path.startsWith('http')) return path; 
+              
+              const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+              return `${baseUrl}/${cleanPath}`;
+            };
+
+            return { ...item, photo: fixPhotoPath(item.photo) };
           });
 
           setTeamMembers(resolvedData);

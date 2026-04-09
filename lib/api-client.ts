@@ -19,7 +19,8 @@ class ApiClient {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
+    // Default to port 8080 as per BACKEND_API.md
+    this.baseUrl = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8080/api';
   }
 
   // Helper to get backend base URL (without /api)

@@ -9,6 +9,7 @@ export interface GalleryItem {
   description: string;
   thumbnail: string;
   fullImage: string;
+  full_image?: string; // Backend field
   is_show: boolean;
   date_added: string;
 }
@@ -32,27 +33,31 @@ export const useProjectGallery = () => {
       // 2. Fetch from API
       try {
         const response = await apiClient.get<GalleryItem[]>('/galleries');
-        
+
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
-          
-          // Resolve image URLs
+
+          // Resolve image URLs according to Backend API Documentation
+          // Docs: Images are stored in /uploads/... and accessed via http://localhost:8080/uploads/...
           const resolvedData = response.data.map(item => {
             const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
               if (path.startsWith('http')) return path; 
               
+              // Backend uses /uploads/...
+              // Ensure the path is relative (remove leading /)
               const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-              return `${baseUrl}/storage/${cleanPath}`;
+              return `${baseUrl}/${cleanPath}`;
             };
 
+            // Map backend snake_case fields to frontend camelCase
             return {
               ...item,
               thumbnail: fixImagePath(item.thumbnail),
-              fullImage: fixImagePath(item.fullImage),
+              fullImage: fixImagePath(item.full_image), // Backend uses full_image
             };
           });
-          
+
           // Filter only visible galleries
           const filteredImages = resolvedData.filter((item) => item.is_show === true);
           setImages(filteredImages);
