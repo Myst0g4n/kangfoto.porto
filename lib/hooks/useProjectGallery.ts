@@ -9,7 +9,6 @@ export interface GalleryItem {
   description: string;
   thumbnail: string;
   fullImage: string;
-  full_image?: string; // Backend field
   is_show: boolean;
   date_added: string;
 }
@@ -37,17 +36,17 @@ export const useProjectGallery = () => {
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
 
-          // Resolve image URLs according to Backend API Documentation
-          // Docs: Images are stored in /uploads/... and accessed via http://localhost:8080/uploads/...
+          // Resolve image URLs according to Backend API Documentation v2.2.0
+          // Docs: Images are stored as relative paths like "/uploads/gallery/image.jpg"
+          // To display: BASE_URL + image_path (e.g., http://localhost:8080/uploads/gallery/image.jpg)
           const resolvedData = response.data.map(item => {
             const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
-              if (path.startsWith('http')) return path; 
+              if (path.startsWith('http')) return path; // Already full URL
               
-              // Backend uses /uploads/...
-              // Ensure the path is relative (remove leading /)
-              const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-              return `${baseUrl}/${cleanPath}`;
+              // Path dari backend sudah termasuk "/" di depan (e.g., "/uploads/...")
+              // Langsung gabungkan dengan BASE_URL
+              return `${baseUrl}${path}`;
             };
 
             // Map backend snake_case fields to frontend camelCase

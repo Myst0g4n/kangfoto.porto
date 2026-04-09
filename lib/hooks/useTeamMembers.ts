@@ -32,14 +32,16 @@ export const useTeamMembers = () => {
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
           
-          // Resolve team photo URLs
+          // Resolve team photo URLs according to Backend API Documentation v2.2.0
+          // Docs: Images are stored as "/uploads/team/image.jpg"
+          // To display: BASE_URL + image_path
           const resolvedData = response.data.map(item => {
             const fixPhotoPath = (path: string | undefined): string => {
               if (!path) return '';
-              if (path.startsWith('http')) return path; 
+              if (path.startsWith('http')) return path; // Already full URL
               
-              const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-              return `${baseUrl}/${cleanPath}`;
+              // Path dari backend sudah termasuk "/" di depan
+              return `${baseUrl}${path}`;
             };
 
             return { ...item, photo: fixPhotoPath(item.photo) };

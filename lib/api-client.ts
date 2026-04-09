@@ -21,20 +21,20 @@ class ApiClient {
 
   constructor() {
     // Read API URL from environment variable
+    // Example: http://localhost:8080
     const backendUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
 
-    // Backend base URL (without /api)
+    // Store backend base URL for image resolution
     this.backendBaseUrl = backendUrl;
 
-    // Using relative path '/api' so requests are captured by Next.js Rewrites.
-    // Request to /api/* will be proxied automatically to backend.
-    // This is the standard Next.js way to avoid CORS issues.
-    this.baseUrl = '/api';
+    // Use full backend URL for API requests (not proxy)
+    // According to API docs v2.2.0: endpoints are accessed directly at BASE_URL/api/...
+    this.baseUrl = `${backendUrl}/api`;
   }
 
   // Helper to get backend base URL (without /api) for image resolution
   public getBackendBaseUrl(): string {
-    // Images need the full backend URL because they are not proxied by Next.js
+    // Images are accessed at BASE_URL + /uploads/...
     return this.backendBaseUrl;
   }
 
