@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api-client';
-import { getCachedData, setCachedData } from '@/lib/cache';
 
 export interface TeamMember {
   id: number;
@@ -17,44 +16,37 @@ export const useTeamMembers = () => {
 
   useEffect(() => {
     const fetchTeamMembers = async () => {
-      // 1. Check Cache First
-      const cached = getCachedData<TeamMember[]>('teams');
-      if (cached) {
-        setTeamMembers(cached);
-        setLoading(false);
-        // Lanjut fetch API di background
-      }
-
-      // 2. Fetch from API
       try {
+        console.log('🔍 useTeamMembers: Fetching /teams from API...');
+        
         const response = await apiClient.get<TeamMember[]>('/teams');
+
+        console.log('📦 RAW API Response (Teams):', response);
+        console.log('📦 Success:', response.success);
+        console.log('📦 Data:', response.data);
 
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
           
-          // Resolve team photo URLs according to Backend API Documentation v2.2.0
-          // Docs: Images are stored as "/uploads/team/image.jpg"
-          // To display: BASE_URL + image_path
           const resolvedData = response.data.map(item => {
             const fixPhotoPath = (path: string | undefined): string => {
               if (!path) return '';
-              if (path.startsWith('http')) return path; // Already full URL
+              if (path.startsWith('http')) return path;
               
-              // Path dari backend sudah termasuk "/" di depan
-              return `${baseUrl}${path}`;
+              const slash = path.startsWith('/') ? '' : '/';
+              return `${baseUrl}${slash}${path}`;
             };
 
             return { ...item, photo: fixPhotoPath(item.photo) };
           });
 
+          console.log('📸 Resolved Team Members:', resolvedData);
           setTeamMembers(resolvedData);
-          setCachedData('teams', resolvedData); // Update cache
         } else {
-          if (!cached) {
-            throw new Error(response.error || 'Failed to fetch team members');
-          }
+          throw new Error(response.error || 'Failed to fetch team members');
         }
       } catch (err) {
+        console.error('❌ useTeamMembers Error:', err);
         setError('Failed to fetch team members');
         setTeamMembers([]);
       } finally {

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api-client';
-import { getCachedData, setCachedData } from '@/lib/cache';
 
 export interface GalleryItem {
   id: number;
@@ -20,54 +19,52 @@ export const useProjectGallery = () => {
 
   useEffect(() => {
     const fetchGallery = async () => {
-      // 1. Check Cache First
-      const cached = getCachedData<GalleryItem[]>('galleries');
-      if (cached) {
-        setImages(cached);
-        setLoading(false);
-        // Kita lanjut fetch API di background untuk update cache jika perlu,
-        // tapi UI sudah loading selesai.
-      }
-
-      // 2. Fetch from API
       try {
+        // DEBUG: Log before fetch
+        console.log('🔍 useProjectGallery: Fetching /galleries from API...');
+        
         const response = await apiClient.get<GalleryItem[]>('/galleries');
+
+        // DEBUG: Log raw response
+        console.log('📦 RAW API Response (Galleries):', response);
+        console.log('📦 Success:', response.success);
+        console.log('📦 Data:', response.data);
+        console.log('📦 Error:', response.error);
 
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
+          console.log('🌐 Base URL:', baseUrl);
 
-          // Resolve image URLs according to Backend API Documentation v2.2.0
-          // Docs: Images are stored as relative paths like "/uploads/gallery/image.jpg"
-          // To display: BASE_URL + image_path (e.g., http://localhost:8080/uploads/gallery/image.jpg)
           const resolvedData = response.data.map(item => {
             const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
-              if (path.startsWith('http')) return path; // Already full URL
+              if (path.startsWith('http')) return path;
               
-              // Path dari backend sudah termasuk "/" di depan (e.g., "/uploads/...")
-              // Langsung gabungkan dengan BASE_URL
-              return `${baseUrl}${path}`;
+              // Ensure proper slash between baseUrl and path
+              const slash = path.startsWith('/') ? '' : '/';
+              return `${baseUrl}${slash}${path}`;
             };
 
-            // Map backend snake_case fields to frontend camelCase
             return {
               ...item,
               thumbnail: fixImagePath(item.thumbnail),
-              fullImage: fixImagePath(item.full_image), // Backend uses full_image
+              fullImage: fixImagePath(item.full_image),
             };
           });
 
+          console.log('🖼️ Resolved Galleries:', resolvedData);
+
           // Filter only visible galleries
           const filteredImages = resolvedData.filter((item) => item.is_show === true);
+          console.log('👀 Visible Galleries count:', filteredImages.length);
+          console.log('👀 Visible Galleries data:', filteredImages);
+          
           setImages(filteredImages);
-          setCachedData('galleries', filteredImages); // Update cache
         } else {
-          // Jika API gagal dan tidak ada cache, tampilkan error
-          if (!cached) {
-             throw new Error(response.error || 'Failed to fetch gallery');
-          }
+          throw new Error(response.error || 'Failed to fetch gallery');
         }
       } catch (err) {
+        console.error('❌ useProjectGallery Error:', err);
         setError('Failed to fetch gallery');
         setImages([]);
       } finally {
@@ -78,21 +75,5 @@ export const useProjectGallery = () => {
     fetchGallery();
   }, []);
 
-  // Get first 5 images for preview
-  const getPreviewImages = (): GalleryItem[] => {
-    return images.slice(0, 5);
-  };
-
-  // Get all images
-  const getAllGalleryImages = (): GalleryItem[] => {
-    return images;
-  };
-
-  return {
-    images,
-    loading,
-    error,
-    getPreviewImages,
-    getAllGalleryImages,
-  };
+  return { images, loading, error };
 };
