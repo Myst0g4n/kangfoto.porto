@@ -55,7 +55,11 @@ export const useProjectGallery = () => {
           console.log('🖼️ Resolved Galleries:', resolvedData);
 
           // Filter only visible galleries
-          const filteredImages = resolvedData.filter((item) => item.is_show === true);
+          // Cek berbagai kemungkinan format is_show dari backend (true, 1, "true", "1")
+          const filteredImages = resolvedData.filter((item) => 
+            item.is_show === true || item.is_show === 1 || item.is_show === '1' || item.is_show === 'true'
+          );
+          
           console.log('👀 Visible Galleries count:', filteredImages.length);
           console.log('👀 Visible Galleries data:', filteredImages);
           
