@@ -17,13 +17,7 @@ export const useTeamMembers = () => {
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
-        console.log('🔍 useTeamMembers: Fetching /teams from API...');
-        
         const response = await apiClient.get<TeamMember[]>('/teams');
-
-        console.log('📦 RAW API Response (Teams):', response);
-        console.log('📦 Success:', response.success);
-        console.log('📦 Data:', response.data);
 
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
@@ -40,13 +34,11 @@ export const useTeamMembers = () => {
             return { ...item, photo: fixPhotoPath(item.photo) };
           });
 
-          console.log('📸 Resolved Team Members:', resolvedData);
           setTeamMembers(resolvedData);
         } else {
           throw new Error(response.error || 'Failed to fetch team members');
         }
       } catch (err) {
-        console.error('❌ useTeamMembers Error:', err);
         setError('Failed to fetch team members');
         setTeamMembers([]);
       } finally {
