@@ -25,7 +25,7 @@ export const useProjectGallery = () => {
         if (response.success && response.data) {
           const baseUrl = apiClient.getBackendBaseUrl();
 
-          const resolvedData = response.data.map(item => {
+          const resolvedData = response.data.map((item: any) => {
             const fixImagePath = (path: string | undefined): string => {
               if (!path) return '';
               if (path.startsWith('http')) return path;
@@ -37,7 +37,7 @@ export const useProjectGallery = () => {
             return {
               ...item,
               thumbnail: fixImagePath(item.thumbnail),
-              fullImage: fixImagePath(item.full_image),
+              fullImage: fixImagePath(item.full_image || item.fullImage),
             };
           });
 
