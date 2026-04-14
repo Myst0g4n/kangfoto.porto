@@ -21,7 +21,7 @@ export const usePricePackages = () => {
         const response = await apiClient.get<PricePackage[]>('/packages');
         
         if (response.success && response.data) {
-          // Pastikan features adalah array, jika string JSON maka parse dulu
+          // Pastikan features adalah array, jika string JSON maka parse dulu dengan penanganan error yang lebih baik
           const parsedPackages = response.data.map((pkg: any) => {
             let features = pkg.features;
             
@@ -29,14 +29,25 @@ export const usePricePackages = () => {
               try {
                 // Cek apakah string terlihat seperti array JSON
                 if (features.trim().startsWith('[')) {
-                  features = JSON.parse(features);
+                  try {
+                    // Coba parse standar
+                    features = JSON.parse(features);
+                  } catch (e) {
+                    // Jika gagal (misal karena single quotes atau escaping), coba bersihkan
+                    // 1. Hapus backslash escape characters jika ada
+                    let cleaned = features.replace(/\\/g, '');
+                    // 2. Ganti single quotes ke double quotes
+                    cleaned = cleaned.replace(/'/g, '"');
+                    // 3. Coba parse lagi
+                    features = JSON.parse(cleaned);
+                  }
                 } else {
-                  // Jika bukan format JSON, anggap sebagai satu fitur
+                  // Jika bukan format array, anggap sebagai satu fitur
                   features = [features];
                 }
               } catch (e) {
-                // Jika parsing gagal, masukkan string asli ke dalam array
-                console.warn('Failed to parse features for package:', pkg.title);
+                // Jika semua parsing gagal, masukkan string asli ke dalam array
+                console.warn('Failed to parse features for package:', pkg.title, features);
                 features = [features];
               }
             }
